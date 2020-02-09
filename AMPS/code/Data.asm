@@ -162,7 +162,7 @@ ModEnvs_End:
 ; Include music, sound effects and voice table
 ; ---------------------------------------------------------------------------
 
-	include "AMPS/Voices.asm"	; include universal Voice bank
+	include "AMPS/Voices.s2a"	; include universal Voice bank
 	opt ae-				; disable automatic evens
 
 sfxaddr	incSFX				; include all sfx
