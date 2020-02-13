@@ -9,8 +9,8 @@ Credits_Header:
 	sHeaderFM	Credits_FM3, $F4, $14
 	sHeaderFM	Credits_FM4, $F4, $08
 	sHeaderFM	Credits_FM5, $F4, $20
-	sHeaderPSG	Credits_PSG1, $D0+$0C, $08, $00, v00
-	sHeaderPSG	Credits_PSG2, $D0+$0C, $18, $00, v00
+	sHeaderPSG	Credits_PSG1, $D0+$0C, $08, $00, vNone
+	sHeaderPSG	Credits_PSG2, $D0+$0C, $18, $00, vNone
 	sHeaderPSG	Credits_PSG3, $00+$0C, $18, $00, v04
 
 	; Patch $00
@@ -1326,7 +1326,7 @@ Credits_Loop21:
 	sCall		Credits_Call15
 	saTranspose	$0C
 	saVol		-$20
-	sVolEnv		v00
+	sVolEnv		vNone
 	sCall		Credits_Call24
 	dc.b nRst, $0C, nF5, nRst, $03, nF5, nRst, nRst
 	dc.b nF5, nRst, $09

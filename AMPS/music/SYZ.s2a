@@ -10,7 +10,7 @@ SpringYard_Header:
 	sHeaderFM	SpringYard_FM4, $F4, $18
 	sHeaderFM	SpringYard_FM5, $F4, $18
 	sHeaderPSG	SpringYard_PSG1, $D0+$0C, $30, $00, v06
-	sHeaderPSG	SpringYard_PSG2, $E8+$0C, $38, $00, v00
+	sHeaderPSG	SpringYard_PSG2, $E8+$0C, $38, $00, vNone
 	sHeaderPSG	SpringYard_PSG3, $00, $28, $00, v04
 
 	; Patch $00

@@ -1,4 +1,4 @@
-	sHeaderInit
+	sHeaderInitSFX
 	sHeaderPrio	$70
 	sHeaderCh	$04
 	sHeaderSFX	$80, ctFM3, .FM3, $10, $00

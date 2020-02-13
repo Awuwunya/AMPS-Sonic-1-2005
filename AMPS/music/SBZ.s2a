@@ -9,8 +9,8 @@ ScrabBrain_Header:
 	sHeaderFM	ScrabBrain_FM3, $F4, $13
 	sHeaderFM	ScrabBrain_FM4, $F4, $17
 	sHeaderFM	ScrabBrain_FM5, $F4, $17
-	sHeaderPSG	ScrabBrain_PSG1, $D0+$0C, $18, $00, v00
-	sHeaderPSG	ScrabBrain_PSG2, $D0+$0C, $18, $00, v00
+	sHeaderPSG	ScrabBrain_PSG1, $D0+$0C, $18, $00, vNone
+	sHeaderPSG	ScrabBrain_PSG2, $D0+$0C, $18, $00, vNone
 	sHeaderPSG	ScrabBrain_PSG3, $00, $18, $00, v04
 
 	; Patch $00
@@ -372,13 +372,13 @@ ScrabBrain_Call9:
 
 ScrabBrain_PSG1:
 	saVol		$08
-	sVolEnv		v00
+	sVolEnv		vNone
 	sCall		ScrabBrain_Call6
 	sVolEnv		v06
 	saVol		-$08
 	sCall		ScrabBrain_Loop11
 	dc.b nRst, $60
-	sVolEnv		v00
+	sVolEnv		vNone
 	saVol		-$08
 
 ScrabBrain_Loop15:
@@ -399,7 +399,7 @@ ScrabBrain_Call10:
 	sRet
 
 ScrabBrain_PSG2:
-	sVolEnv		v00
+	sVolEnv		vNone
 	saVol		$08
 	dc.b nC5, $03, nC5, nRst, nC5, nRst, nC5, nC5
 	sGate		$00

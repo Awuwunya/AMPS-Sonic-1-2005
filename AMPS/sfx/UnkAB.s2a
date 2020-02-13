@@ -1,10 +1,10 @@
-	sHeaderInit
+	sHeaderInitSFX
 	sHeaderPrio	$70
 	sHeaderCh	$01
 	sHeaderSFX	$A1, ctPSG2, .PSG3, $00, $00
 
 .PSG3:
-	sVolEnv		v00
+	sVolEnv		vNone
 	sNoisePSG	snWhitePSG3
 	dc.b nHiHat, $03, nRst, $03, nHiHat, $01, sHold
 

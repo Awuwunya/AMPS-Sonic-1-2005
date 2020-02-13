@@ -4,7 +4,18 @@
 ; make it easier to debug built ROMS! If you would like easier
 ; assistance from Natsumi, please keep this section intact!
 ; ---------------------------------------------------------------------------
-	dc.b "AMPS-v1.1 "		; ident str
+	dc.b "AMPS-v1.1"		; ident str
+
+	if safe
+		dc.b "s"		; safe mode enabled
+
+	else
+		dc.b " "		; safe mode disabled
+	endif
+
+	if FEATURE_FM6
+		dc.b "F6"		; FM6 enabled
+	endif
 
 	if FEATURE_SFX_MASTERVOL
 		dc.b "SM"		; sfx ignore master volume
@@ -96,6 +107,7 @@ SampleList:
 ; Define volume envelopes and their data
 ; ---------------------------------------------------------------------------
 
+vNone =		$00
 __venv =	$01
 VolEnvs:
 	volenv 01, 02, 03, 04, 05, 06, 07, 08
@@ -140,12 +152,13 @@ vd08:		dc.b $00, $00, $00, $00, $00, $08, $08, $08
 vd09:		dc.b $00, $08, $10, $18, $20, $28, $30, $38
 		dc.b $40, $48, $50, $58, $60, $68, $70, $78
 		dc.b eHold
+		even
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Define volume envelopes and their data
 ; ---------------------------------------------------------------------------
 
-		even
+mNone =		$00
 __menv =	$01
 
 ModEnvs:
