@@ -3,7 +3,7 @@
 	sHeaderCh	$01
 	sHeaderSFX	$80, ctFM5, .FM5, $00, $00
 
-.FM5	sVoice		$10
+.FM5	sVoice		pRumble
 	sModAMPS	$01, $01, $20, $08
 
 .Loop1	dc.b nBb0, $0A

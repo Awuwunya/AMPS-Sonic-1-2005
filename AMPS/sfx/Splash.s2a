@@ -14,6 +14,6 @@
 	sLoop		$00, $0F, .Loop1
 	sStop
 
-.FM5	sVoice		$05
+.FM5	sVoice		pSplash
 	dc.b nCs3, $14
 	sStop

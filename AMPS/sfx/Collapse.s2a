@@ -13,7 +13,7 @@
 .FM5	sPan		spLeft, $00
 	dc.b nRst, $01
 
-.FM4	sVoice		$06
+.FM4	sVoice		pBossHit
 	sModAMPS	$03, $01, $20, $04
 
 .Loop2	dc.b nC0, $18

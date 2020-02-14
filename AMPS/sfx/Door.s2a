@@ -3,7 +3,7 @@
 	sHeaderCh	$01
 	sHeaderSFX	$80, ctFM5, .FM5, $F4, $00
 
-.FM5	sVoice		$12
+.FM5	sVoice		pDoor
 	dc.b nD2, $04, nRst, nG2, $06
 	sStop
 

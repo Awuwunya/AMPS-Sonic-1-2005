@@ -3,5 +3,5 @@
 	sHeaderCh	$01
 	sHeaderSFX	$80, ctFM5, .FM5, $00, $05
 
-.FM5	sPan	spRight
-	sJump	SFX_Ring1
+.FM5	sPan		spRight
+	sJump		SFX_Ring1

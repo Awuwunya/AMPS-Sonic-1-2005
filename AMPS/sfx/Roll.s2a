@@ -3,7 +3,7 @@
 	sHeaderCh	$01
 	sHeaderSFX	$80, ctFM4, .FM4, $0C, $05
 
-.FM4	sVoice		$16
+.FM4	sVoice		pRoll
 	dc.b nRst, $01
 	sModAMPS	$03, $01, $09, $FF
 	dc.b nCs6, $25

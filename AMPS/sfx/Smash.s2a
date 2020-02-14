@@ -4,7 +4,7 @@
 	sHeaderSFX	$80, ctFM5, .FM5, $00, $00
 	sHeaderSFX	$A1, ctPSG3, .PSG3, $00+$0C, $00
 
-.FM5	sVoice		$06
+.FM5	sVoice		pBossHit
 	sModAMPS	$03, $01, $20, $04
 
 .Loop2	dc.b nC0, $18

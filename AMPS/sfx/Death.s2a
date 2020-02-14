@@ -3,7 +3,7 @@
 	sHeaderCh	$01
 	sHeaderSFX	$80, ctFM5, .FM5, $F4, $00
 
-.FM5	sVoice		$01
+.FM5	sVoice		pDeath
 	dc.b nB3, $07, sHold, nAb3
 
 .loop	dc.b $01
