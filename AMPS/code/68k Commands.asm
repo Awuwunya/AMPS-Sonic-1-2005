@@ -294,7 +294,7 @@ dcGate:
 		AMPS_Debug_dcGate		; check if this channel has gate support
 	endif
 
-		move.b	(a2),cGateMain(a1)	; load note timeout from tracker to channel
+		move.b	(a2),cGateMain(a1)	; load note gate from tracker to channel
 		move.b	(a2)+,cGateCur(a1)	; ''
 		rts
 ; ===========================================================================
@@ -770,7 +770,6 @@ dcVoice:
 
 		btst	#ctbDAC,cType(a1)	; check if this is a DAC channel
 		bne.s	locret_Backup		; if is, skip
-
 		btst	#cfbInt,(a1)		; check if channel is interrupted by SFX
 		bne.s	locret_Backup		; if is, skip
 
@@ -781,8 +780,8 @@ dcVoice:
 ; This routine is speed optimized in a way that allows Dual PCM
 ; to only be stopped for as long as it must be. This will waste
 ; some cycles for 68000, but it will help improve DAC quality.
-; ---------------------------------------------------------------------------	;
-
+; ---------------------------------------------------------------------------
+;
 ; input:
 ;   a1 - Channel to operate on
 ;   d4 - Voice ID to use
@@ -1033,10 +1032,10 @@ dcsLFO:
 
 	InitChYM				; prepare to write Channel-specific YM registers
 	stopZ80
-	WriteChYM	#$60, (a5)+		; Decay 1 level: Decay 1 + AMS enable bit for operator 1
-	WriteChYM	#$68, (a5)+		; Decay 1 level: Decay 1 + AMS enable bit for operator 3
-	WriteChYM	#$64, (a5)+		; Decay 1 level: Decay 1 + AMS enable bit for operator 2
 	WriteChYM	#$6C, (a5)+		; Decay 1 level: Decay 1 + AMS enable bit for operator 4
+	WriteChYM	#$64, (a5)+		; Decay 1 level: Decay 1 + AMS enable bit for operator 2
+	WriteChYM	#$68, (a5)+		; Decay 1 level: Decay 1 + AMS enable bit for operator 3
+	WriteChYM	#$60, (a5)+		; Decay 1 level: Decay 1 + AMS enable bit for operator 1
 		bra.s	.cont
 
 .skipLFO
