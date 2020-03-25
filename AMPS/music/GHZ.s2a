@@ -696,10 +696,10 @@ GreenHill_Jump9:
 	dc.b $08
 	sJump		GreenHill_Jump9
 
-GreenHill_DAC2:
+GreenHill_DAC1:
 	sStop
 
-GreenHill_DAC1:
+GreenHill_DAC2:
 	dc.b nRst, $08, dKick, dSnare, dKick, dKick, dSnare, dSnare
 	dc.b dSnare
 

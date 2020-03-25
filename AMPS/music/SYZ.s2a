@@ -355,7 +355,7 @@ SpringYard_Jump5:
 	dc.b $02, nRst, nHiHat
 	sJump		SpringYard_Jump5
 
-SpringYard_DAC1:
+SpringYard_DAC2:
 	dc.b dSnare, $06, $06, $06, $06, $06, $06, $04
 	dc.b $02, $04, dKick, $02
 
@@ -391,5 +391,5 @@ SpringYard_Call14:
 	sRet
 
 SpringYard_PSG2:
-SpringYard_DAC2:
+SpringYard_DAC1:
 	sStop

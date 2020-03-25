@@ -143,7 +143,7 @@ Invincibility_Jump2:
 	dc.b $0C
 	sJump		Invincibility_Jump2
 
-Invincibility_DAC1:
+Invincibility_DAC2:
 	dc.b dSnare, $06, dSnare, dSnare, dSnare, dSnare, $02, dSnare
 	dc.b $04, dKick, $12
 
@@ -159,6 +159,6 @@ Invincibility_Loop7:
 	dc.b dSnare, dSnare
 	sJump		Invincibility_Loop7
 
-Invincibility_DAC2:
+Invincibility_DAC1:
 Invincibility_PSG1:
 	sStop

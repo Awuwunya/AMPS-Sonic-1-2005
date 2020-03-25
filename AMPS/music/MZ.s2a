@@ -323,7 +323,7 @@ Marble_Call7:
 	dc.b nAb5
 	sRet
 
-Marble_DAC1:
+Marble_DAC2:
 	dc.b nRst, $06, dSnare, $03, $03, $0C, dKick, $0C
 	dc.b $0C, $0C
 
@@ -342,5 +342,5 @@ Marble_Loop4:
 	sGate		$00
 	sRet
 
-Marble_DAC2:
+Marble_DAC1:
 	sStop

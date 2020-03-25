@@ -177,10 +177,10 @@ Final_Loop3:
 	sLoop		$00, $04, Final_Loop3
 	sJump		Final_Loop1
 
-Final_DAC2:
+Final_DAC1:
 	sStop
 
-Final_DAC1:
+Final_DAC2:
 	dc.b dHiTimpani, $06, dLowTimpani, dLowTimpani, dHiTimpani, $03, dHiTimpani, $09
 	dc.b dSnare, $03, dSnare, $03, dSnare, $03, dSnare, $03
 	dc.b dLowTimpani, dLowTimpani

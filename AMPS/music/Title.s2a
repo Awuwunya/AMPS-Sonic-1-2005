@@ -150,7 +150,7 @@ TitleScreen_Loop1:
 	dc.b $0C
 	sStop
 
-TitleScreen_DAC1:
+TitleScreen_DAC2:
 	dc.b nRst, $0C, dSnare, dSnare, dSnare, dKick, dSnare, dKick
 	dc.b dSnare, dKick, dSnare, dKick, dSnare, dKick, dSnare, dKick
 	dc.b dSnare, dKick, dSnare, dKick, $06, nRst, $02, dSnare
@@ -158,6 +158,6 @@ TitleScreen_DAC1:
 	dc.b dKick, dSnare, dKick, $06, dSnare, $12, dSnare, $0C
 	dc.b dKick
 
-TitleScreen_DAC2:
+TitleScreen_DAC1:
 TitleScreen_PSG1:
 	sStop

@@ -131,10 +131,10 @@ GameOver_FM5:
 	dc.b nD7, $12, nRst, $03, nD7, $1B
 	dc.b nRst, $30, nG7, $12, nRst, $03, nG7, $1B
 
-GameOver_DAC2:
+GameOver_DAC1:
 	sStop
 
-GameOver_DAC1:
+GameOver_DAC2:
 	dc.b nRst, $18, dKick
-	sLoop		$00, $04, GameOver_DAC1
+	sLoop		$00, $04, GameOver_DAC2
 	sStop

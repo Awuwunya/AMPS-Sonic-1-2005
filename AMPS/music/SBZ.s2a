@@ -463,7 +463,7 @@ ScrabBrain_Loop22:
 	sLoop		$00, $88, ScrabBrain_Loop22
 	sJump		ScrabBrain_PSG3
 
-ScrabBrain_DAC1:
+ScrabBrain_DAC2:
 	dc.b dSnare, $03, $06, $06, $03, $03, $0F, dKick
 	dc.b $0C, nRst, $0C, dKick, dKick, $06, dSnare, dSnare
 	dc.b dSnare, $03, $03
@@ -495,7 +495,7 @@ ScrabBrain_Loop25:
 	dc.b dMidTimpani, $02, dSnare, $01, dHiTimpani, $05, dSnare, $01
 	dc.b dMidTimpani, $05, dSnare, $01, dHiTimpani, $02, dSnare, $03
 	sLoop		$01, $02, ScrabBrain_Loop25
-	sJump		ScrabBrain_DAC1
+	sJump		ScrabBrain_DAC2
 
 ScrabBrain_Call12:
 	dc.b dKick, $0C, dSnare, $09, dKick, $06, $03, dKick
@@ -535,5 +535,5 @@ ScrabBrain_Call3:
 	dc.b nA4, nAb4, nAb4, nG4, nG4
 	sRet
 
-ScrabBrain_DAC2:
+ScrabBrain_DAC1:
 	sStop

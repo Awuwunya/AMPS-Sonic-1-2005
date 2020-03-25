@@ -418,12 +418,12 @@ StarLight_Jump6:
 	saVol		-$10
 	sJump		StarLight_Jump6
 
-StarLight_DAC1:
+StarLight_DAC2:
 	dc.b nRst, $30
 
 StarLight_Jump7:
 	dc.b dKick, $0C
 	sJump		StarLight_Jump7
 
-StarLight_DAC2:
+StarLight_DAC1:
 	sStop

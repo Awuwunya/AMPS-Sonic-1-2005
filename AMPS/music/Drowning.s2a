@@ -165,12 +165,12 @@ Drowning_Loop4:
 	sLoop		$00, $0A, Drowning_Loop4
 	sStop
 
-Drowning_DAC2:
+Drowning_DAC1:
 	sStop
 
-Drowning_DAC1:
+Drowning_DAC2:
 	dc.b dSnare, $0C, dSnare, dSnare, dSnare
-	sLoop		$00, $0A, Drowning_DAC1
+	sLoop		$00, $0A, Drowning_DAC2
 	dc.b dSnare, $06
 	sStop
 

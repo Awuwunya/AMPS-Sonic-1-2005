@@ -142,10 +142,10 @@ Continue_Loop4:
 	dc.b nCs6, $06, nRst, nCs6, nRst, nA5, nRst, nA5
 	dc.b nRst, nD6, $0C, nRst, $06, nD6, $4E
 
-Continue_DAC2:
+Continue_DAC1:
 	sStop
 
-Continue_DAC1:
+Continue_DAC2:
 	dc.b nRst, $30
 
 Continue_Loop5:

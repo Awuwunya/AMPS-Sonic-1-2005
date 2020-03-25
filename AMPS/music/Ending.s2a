@@ -231,7 +231,7 @@ Ending_Loop4:
 	dc.b $0C
 	sStop
 
-Ending_DAC1:
+Ending_DAC2:
 	dc.b dKick, $0C, dSnare, dKick, dSnare, dKick, $0C, dSnare
 	dc.b dKick, $06, nRst, $02, dSnare, dSnare, dSnare, $09
 	dc.b dSnare, $03
@@ -245,5 +245,5 @@ Ending_Loop5:
 	dc.b dKick, $0C, dSnare, dKick, dSnare, dKick, $06, dSnare
 	dc.b $12, dSnare, $0C, dKick
 
-Ending_DAC2:
+Ending_DAC1:
 	sStop

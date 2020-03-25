@@ -156,10 +156,10 @@ GotThrough_PSG2:
 	dc.b nG5, $06, nC6, nB5, nG5, nC6, nB5, nG5
 	dc.b nC6, nB5, $0C, nC6, $09, nB5, $33
 
-GotThrough_DAC2:
+GotThrough_DAC1:
 	sStop
 
-GotThrough_DAC1:
+GotThrough_DAC2:
 	dc.b dSnare, $03, dSnare, dKick, $06, dKick, dSnare, $03
 	dc.b dSnare, dKick, $06, dKick, dSnare, $03, dSnare, dHiTimpani
 	dc.b dHiTimpani, dFloorTimpani, dFloorTimpani, $03, dFloorTimpani, dFloorTimpani, dSnare, $09

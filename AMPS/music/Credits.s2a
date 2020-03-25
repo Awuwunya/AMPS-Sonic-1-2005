@@ -1536,7 +1536,7 @@ Credits_Loop39:
 	dc.b $0C
 	sStop
 
-Credits_DAC1:
+Credits_DAC2:
 	dc.b dSnare, $06, dSnare, dSnare, dSnare, dSnare, $0C, $06
 	dc.b $0C, $06, $0C, $0C, $0C
 	sCall		Credits_Call27
@@ -1747,5 +1747,5 @@ Credits_Call22:
 	dc.b nA5, nC6, $09, nE6, $0F, nD6, $0C
 	sRet
 
-Credits_DAC2:
+Credits_DAC1:
 	sStop

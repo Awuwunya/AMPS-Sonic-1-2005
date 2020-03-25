@@ -220,10 +220,10 @@ Boss_Call1:
 	dc.b nFs6, nB6, nCs7, nD7, $30
 	sRet
 
-Boss_DAC2:
+Boss_DAC1:
 	sStop
 
-Boss_DAC1:
+Boss_DAC2:
 	dc.b dHiTimpani, $06, dLowTimpani, dHiTimpani, dLowTimpani, dHiTimpani, dLowTimpani, dHiTimpani
 	dc.b dLowTimpani
 

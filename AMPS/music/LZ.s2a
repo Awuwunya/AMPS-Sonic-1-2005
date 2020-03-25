@@ -370,7 +370,7 @@ Labyrinth_Call11:
 	dc.b $06, $06, $06, $06
 	sRet
 
-Labyrinth_DAC1:
+Labyrinth_DAC2:
 	dc.b dSnare, $06, dSnare, dSnare, dKick, $0C, dSnare, $06
 	dc.b $0C
 
@@ -392,5 +392,5 @@ Labyrinth_Call12:
 	dc.b dKick, $0C, dSnare, $06, dKick, dKick, $0C, dSnare
 	sRet
 
-Labyrinth_DAC2:
+Labyrinth_DAC1:
 	sStop

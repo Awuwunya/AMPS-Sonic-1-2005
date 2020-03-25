@@ -111,10 +111,10 @@ ExtraLife_PSG1:
 	sGate		$00
 	dc.b nD7, $09, nB6, nA6, $06, nCs7, $18
 
-ExtraLife_DAC1:
+ExtraLife_DAC2:
 	sStop
 
-ExtraLife_DAC2:
+ExtraLife_DAC1:
 	dc.b dHiTimpani, $12, $06, dFloorTimpani, $09, $09, $06, dHiTimpani
 	dc.b $06, dLowTimpani, dHiTimpani, dLowTimpani, dHiTimpani, $0C
 	sBackup
