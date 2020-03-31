@@ -1,9 +1,7 @@
-; ---------------------------------------------------------------------------------------------
-; AMPS - SMPS2ASM macro & equate file.
-;
-; Based on Flamewing's SMPS2ASM, and S1SMPS2ASM by Marc (AKA Cinossu)
-; Reworked and improved by Natsumi
-; ---------------------------------------------------------------------------------------------
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; AMPS - SMPS2ASM macro & equate file
+; ---------------------------------------------------------------------------
 
 ; this macro is created to emulate enum in AS
 enum		macro lable
@@ -13,9 +11,10 @@ _num =		_num+1
 	shift
 	endr
     endm
-; ---------------------------------------------------------------------------------------------
-; Note Equates
-; ---------------------------------------------------------------------------------------------
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; Note equates
+; ---------------------------------------------------------------------------
 
 _num =		$80
 	enum nRst
@@ -28,9 +27,10 @@ _num =		$80
 	enum nC6,nCs6,nD6,nEb6,nE6,nF6,nFs6,nG6,nAb6,nA6,nBb6,nB6
 	enum nC7,nCs7,nD7,nEb7,nE7,nF7,nFs7,nG7,nAb7,nA7,nBb7
 nHiHat =	nA6
-; ---------------------------------------------------------------------------------------------
-; Header Macros
-; ---------------------------------------------------------------------------------------------
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; Header macros
+; ---------------------------------------------------------------------------
 
 ; Header - Initialize a music file
 sHeaderInit	macro
@@ -42,7 +42,7 @@ sHeaderInitSFX	macro
 
     endm
 
-; Header - Set up Channel Usage
+; Header - Set up channel usage
 sHeaderCh	macro fm,psg
 	if narg=2
 		dc.b \psg-1, \fm-1
@@ -64,19 +64,19 @@ sHeaderCh	macro fm,psg
 	endif
     endm
 
-; Header - Set up Tempo and Tick Multiplier
+; Header - Set up tempo and tick multiplier
 sHeaderTempo	macro tmul,tempo
 	dc.b \tempo,\tmul-1
     endm
 
-; Header - Set priority leve
+; Header - Set priority level
 sHeaderPrio	macro prio
 	dc.b \prio
     endm
 
-; Header - Set up DAC Channel
+; Header - Set up a DAC channel
 sHeaderDAC	macro loc,vol,samp
-	dc.w \loc-offset(*)
+	dc.w \loc-*
 
 	if narg>=2
 		dc.b \vol
@@ -90,36 +90,36 @@ sHeaderDAC	macro loc,vol,samp
 	endif
     endm
 
-; Header - Set up FM Channel
+; Header - Set up an FM channel
 sHeaderFM	macro loc,pitch,vol
-	dc.w \loc-offset(*)
+	dc.w \loc-*
 	dc.b (\pitch)&$FF,(\vol)&$FF
     endm
 
-; Header - Set up PSG Channel
+; Header - Set up a PSG channel
 sHeaderPSG	macro loc,pitch,vol,detune,volenv
-	dc.w \loc-offset(*)
+	dc.w \loc-*
 	dc.b (\pitch)&$FF,(\vol)&$FF,(\detune)&$FF,\volenv
     endm
 
-; Header - Set up SFX Channel
+; Header - Set up an SFX channel
 sHeaderSFX	macro flags,type,loc,pitch,vol
 	dc.b \flags,\type
-	dc.w \loc-offset(*)
+	dc.w \loc-*
 	dc.b (\pitch)&$FF,(\vol)&$FF
     endm
-; ---------------------------------------------------------------------------------------------
+; ===========================================================================
+; ---------------------------------------------------------------------------
 ; Macros for FM instruments
-; Patches - Feedback
-; ---------------------------------------------------------------------------------------------
+; ---------------------------------------------------------------------------
 
-; Patches - Algorithm
+; Patches - Algorithm and patch name
 spAlgorithm	macro val, name
 	if (sPatNum<>0)&(safe=0)
 		; align the patch
-		dc.b (offset(*)^(sPatNum*spTL4))&$FF
-		dc.b ((offset(*)>>8)+(spDe3*spDR3))&$FF
-		dc.b ((offset(*)>>16)-(spTL1*spRR3))&$FF
+		dc.b (*^(sPatNum*spTL4))&$FF
+		dc.b ((*>>8)+(spDe3*spDR3))&$FF
+		dc.b ((*>>16)-(spTL1*spRR3))&$FF
 	endif
 
 	if narg>1
@@ -130,6 +130,7 @@ sPatNum =	sPatNum+1
 spAl =		\val
     endm
 
+; Patches - Feedback
 spFeedback	macro val
 spFe =		\val
     endm
@@ -207,7 +208,7 @@ spRR4 =		\op4
     endm
 
 ; Patches - SSG-EG
-spSSGEG	macro op1,op2,op3,op4
+spSSGEG		macro op1,op2,op3,op4
 spSS1 =		\op1
 spSS2 =		\op2
 spSS3 =		\op3
@@ -246,7 +247,7 @@ spTLMask1 =	((spAl=7)<<7)
     endm
 
 ; Patches - Total Level (for broken total level masks)
-spTotalLv2 macro op1,op2,op3,op4
+spTotalLv2	macro op1,op2,op3,op4
 spTL1 =		\op1
 spTL2 =		\op2
 spTL3 =		\op3
@@ -265,18 +266,20 @@ spTL4 =		\op4
 		dc.b 'NAT'	; align the patch
 	endif
     endm
-; ---------------------------------------------------------------------------------------------
-; Command Flag Macros and Equates. Based on the original s1smps2asm, and Flamewing's smps2asm
-; ---------------------------------------------------------------------------------------------
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; Equates for sPan
+; ---------------------------------------------------------------------------
 
 spNone =	$00
 spRight =	$40
 spLeft =	$80
 spCentre =	$C0
 spCenter =	$C0
-; ---------------------------------------------------------------------------------------------
-; tracker commands
-; ---------------------------------------------------------------------------------------------
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; Tracker commands
+; ---------------------------------------------------------------------------
 
 ; E0xx - Panning, AMS, FMS (PANAFMS - PAFMS_PAN)
 sPan		macro pan, ams, fms
@@ -424,7 +427,7 @@ sModOff		macro
 ; F4xxxx - Keep looping back to xxxx each time the SFX is being played (CONT_SFX)
 sCont		macro loc
 	dc.b $F4
-	dc.w \loc-offset(*)-2
+	dc.w \loc-*-2
     endm
 
 ; F5 - End of channel (TRK_END - TEND_STD)
@@ -435,13 +438,13 @@ sStop		macro
 ; F6xxxx - Jump to xxxx (GOTO)
 sJump		macro loc
 	dc.b $F6
-	dc.w \loc-offset(*)-2
+	dc.w \loc-*-2
     endm
 
 ; F7xxyyzzzz - Loop back to zzzz yy times, xx being the loop index for loop recursion fixing (LOOP)
 sLoop		macro index,loops,loc
 	dc.b $F7, \index
-	dc.w \loc-offset(*)-2
+	dc.w \loc-*-2
 	dc.b \loops-1
 
 	if \loops<2
@@ -452,7 +455,7 @@ sLoop		macro index,loops,loc
 ; F8xxxx - Call pattern at xxxx, saving return point (GOSUB)
 sCall		macro loc
 	dc.b $F8
-	dc.w \loc-offset(*)-2
+	dc.w \loc-*-2
     endm
 
 ; F9 - Return (RETURN)
@@ -562,12 +565,14 @@ sCheck		macro
 		dc.b $FF,$44
 	endif
     endm
-; ---------------------------------------------------------------------------------------------
-; equates for sNoisePSG
-; ---------------------------------------------------------------------------------------------
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; Equates for sNoisePSG
+; ---------------------------------------------------------------------------
 
 snOff =		$00			; disables PSG3 noise mode.
 
 _num =		$E0
 	enum snPeri10, snPeri20, snPeri40, snPeriPSG3
 	enum snWhite10,snWhite20,snWhite40,snWhitePSG3
+

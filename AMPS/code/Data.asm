@@ -66,6 +66,7 @@ MusicIndex:
 MusCount =	__mus-MusOff		; number of installed music tracks
 SFXoff =	__mus			; first SFX ID
 __sfx =		SFXoff
+; ---------------------------------------------------------------------------
 
 SoundIndex:
 	ptrSFX	$01, RingRight
@@ -172,7 +173,7 @@ ModEnvs_End:
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
-; Include music, sound effects and voice table
+; Include music, sound effects and voice bank
 ; ---------------------------------------------------------------------------
 
 	include "AMPS/Voices.s2a"	; include universal Voice bank
@@ -186,13 +187,14 @@ musend
 ; Include samples and filters
 ; ---------------------------------------------------------------------------
 
-		align	$8000		; must be aligned to bank... By the way, these are also set in Z80.asm. Be sure to check it out also.
+		align	$8000		; must be aligned to bank... By the way, these are also used in Z80.asm. Be sure to check it out
 fLog:		incbin "AMPS/filters/Logarithmic.dat"	; logarithmic filter (no filter)
 ;fLinear:	incbin "AMPS/filters/Linear.dat"	; linear filter (no filter)
 
-dacaddr		dcb.b	Z80E_Read*(MaxPitch/$100),$00
-SWF_Stop:	dcb.b	$8000-(2*Z80E_Read*(MaxPitch/$100)),$80
-SWFR_Stop:	dcb.b	Z80E_Read*(MaxPitch/$100),$00
+dacaddr		dcb.b Z80E_Read*(MaxPitch/$100),$00
+SWF_Stop:	dcb.b $8000-(2*Z80E_Read*(MaxPitch/$100)),$80
+SWFR_Stop:	dcb.b Z80E_Read*(MaxPitch/$100),$00
+; ---------------------------------------------------------------------------
 
 	incSWF	Kick, Timpani, Snare, Sega
 	opt ae+				; enable automatic evens

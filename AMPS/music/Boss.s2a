@@ -237,4 +237,4 @@ Boss_Loop2:
 	dc.b dSnare, $06, dSnare, $06, dSnare, $0C, dSnare, $06
 	dc.b dSnare, $01, dHiTimpani, $05, dLowTimpani, $06, dHiTimpani, dLowTimpani
 	dc.b dHiTimpani, dLowTimpani, dHiTimpani, dLowTimpani
-	sJump		Boss_DAC1
+	sJump		Boss_DAC2
