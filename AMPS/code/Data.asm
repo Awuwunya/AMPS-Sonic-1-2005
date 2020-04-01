@@ -110,6 +110,7 @@ SampleList:
 
 vNone =		$00
 __venv =	$01
+
 VolEnvs:
 	volenv 01, 02, 03, 04, 05, 06, 07, 08
 	volenv 09
@@ -176,7 +177,7 @@ ModEnvs_End:
 ; Include music, sound effects and voice bank
 ; ---------------------------------------------------------------------------
 
-	include "AMPS/Voices.s2a"	; include universal Voice bank
+	include "AMPS/Voices.s2a"	; include universal voice bank
 	opt ae-				; disable automatic evens
 
 sfxaddr	incSFX				; include all sfx
@@ -187,7 +188,7 @@ musend
 ; Include samples and filters
 ; ---------------------------------------------------------------------------
 
-		align	$8000		; must be aligned to bank... By the way, these are also used in Z80.asm. Be sure to check it out
+		align	$8000		; must be aligned to bank. By the way, these are also used in Z80.asm. Be sure to check it out
 fLog:		incbin "AMPS/filters/Logarithmic.dat"	; logarithmic filter (no filter)
 ;fLinear:	incbin "AMPS/filters/Linear.dat"	; linear filter (no filter)
 
