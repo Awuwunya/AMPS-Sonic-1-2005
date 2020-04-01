@@ -685,7 +685,7 @@ Credits_FM1:
 	sCall		Credits_Call6
 	ssTempo		$25
 	dc.b nRst, $60
-	ssTempo		$33
+	ssTempo		$55
 	dc.b nRst, $30
 	sVoice		$17
 	saVol		$0E
@@ -1385,7 +1385,7 @@ Credits_Loop23:
 	sLoop		$00, $08, Credits_Loop23
 	sGate		$00
 	sVolEnv		v09
-	saVol		$09
+	saVol		$08
 
 Credits_Loop24:
 	dc.b nRst, $06, nG6, $0C, nG6, nG6, nG6, $06
@@ -1421,13 +1421,12 @@ Credits_Loop27:
 	dc.b nA6, nA6, nE7, nA6, nD7, nA6, nC7, nA6
 	sLoop		$00, $04, Credits_Loop27
 	sLoop		$01, $02, Credits_Loop25
-	dc.b nRst, $60, nRst, nRst, nRst, nRst, nRst, nRst
-	dc.b nRst, nRst
-	saVol		$60
-	ssDetune	$02
-	saVol		$10
-	dc.b nRst, $0C, nE6, $06, nRst, nB6, nE6, $06
-	dc.b nRst, $0C, nE6, $06, nRst, nB6, nE6
+;	dc.b nRst, $60, nRst, nRst, nRst, nRst, nRst, nRst
+;	dc.b nRst, nRst
+;	saVol		$70
+;	ssDetune	$02
+;	dc.b nRst, $0C, nE6, $06, nRst, nB6, nE6, $06
+;	dc.b nRst, $0C, nE6, $06, nRst, nB6, nE6
 	sStop
 
 Credits_PSG3:
