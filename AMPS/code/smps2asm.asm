@@ -406,7 +406,7 @@ sModAMPS	macro wait, speed, step, count
 	sModData \wait,\speed,\step,\count
     endm
 
-sModData	macro wait, speed, count, step
+sModData	macro wait, speed, step, count
 	dc.b \speed, \count, \step, \wait
     endm
 
