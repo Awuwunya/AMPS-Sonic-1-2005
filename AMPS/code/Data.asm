@@ -44,7 +44,6 @@
 	if FEATURE_BACKUP
 		dc.b "BA"		; backup enabled
 	endif
-
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Define music and SFX
@@ -179,6 +178,7 @@ ModEnvs_End:
 
 	include "AMPS/Voices.s2a"	; include universal voice bank
 	opt ae-				; disable automatic evens
+; ---------------------------------------------------------------------------
 
 sfxaddr	incSFX				; include all sfx
 musaddr	incMus				; include all music
@@ -200,4 +200,4 @@ SWFR_Stop:	dcb.b Z80E_Read*(MaxPitch/$100),$00
 	incSWF	Kick, Timpani, Snare, Sega
 	opt ae+				; enable automatic evens
 	list				; continue source listing
-; ===========================================================================
+; ---------------------------------------------------------------------------

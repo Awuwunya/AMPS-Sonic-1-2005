@@ -38031,52 +38031,25 @@ ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 
 DualPCM:
 		PUSHS					; store section information for Main
-Z80Code		SECTION	org(0), file("AMPS/.Z80")	; create a new section for Dual PCM
+Z80Code		SECTION	org(0), file("AMPS/.z80")	; create a new section for Dual PCM
 		z80prog 0				; init z80 program
 		include "AMPS/code/z80.asm"		; code for Dual PCM
 DualPCM_sz:	z80prog					; end z80 program
 		POPS					; go back to Main section
 
 		PUSHS					; store section information for Main
-batcode		SECTION	file("AMPS/z80.bat"), org(0)	; create a new section for a batch file, that will insert compressed Dual PCM
-dpcm equ	offset(DualPCM)
-
-	dc.b "@echo off", $0A
-	if zchkoffs
-		dc.b "asm68k /p AMPS/fix.asm, AMPS/._z80", $0A					; fix the z80 code (since we can't use org, lets fire another assembler... Fuck)
-	endif
-	dc.b "_dlls\koscmp.exe AMPS/._z80 AMPS/.z80.kos", $0A					; compress Z80 driver
-	dc.b "call :setsize ""AMPS/.z80.kos""", $0A						; get size of the compressed file
-	dc.b "if %size% GTR \#Z80_Space (", $0A							; check if file will fit
-	dc.b "echo Not enough space reserved for Z80 file! Please increase it to %size%!",$0A	; warn user about file size
-	dc.b "pause", $0A, "exit", $0A, ")", $0A
-	dc.b "echo 	incbin s1built.dat, 0, \#dpcm >AMPS/merge.asm",$0A			; include first part of s1built.md
-	dc.b "echo 	incbin AMPS/.z80.kos >>AMPS/merge.asm",$0A				; include compressed driver
-	dc.b "echo 	incbin s1built.dat, \#dpcm+\#Z80_Space >>AMPS/merge.asm",$0A		; include second part of s1built.md
-	dc.b "asm68k /p AMPS/merge.asm, s1built.md", $0A					; finally, merge the files. Why do I keep doing things like this =(
-	dc.b ":setsize", $0A
-	dc.b "set size=%~z1 & goto :eof"							; grab the file size
-		POPS					; go back to Main section
+mergecode	SECTION	file("AMPS/.z80.dat"), org(0)	; create settings file for storing info about how to merge things
+		dc.l offset(DualPCM), Z80_Space		; store info about location of file and size available
 
 	if zchkoffs
-		PUSHS					; store section information for Main
-mergecode	SECTION	file("AMPS/fix.asm"), org(0)	; create a new section for a batch file, that will insert compressed Dual PCM
-		dc.b "	org 0", $0A			; this makes sure the assembler works
-		dc.b "	incbin ""AMPS/.z80""", $0A	; include the uncompressed z80 data here
-
 		rept zfuturec
-			popp zoff			; grab the location of the include
-			popp zbyte			; grab the included byte
-
-zderp = zoff
-zherp = zbyte
-			dc.b "	org \#zderp", $0A	; write the org statement
-			dc.b "	dc.b \#zherp", $0A	; dc.b the fixed byte in
+			popp zoff			; grab the location of the patch
+			popp zbyte			; grab the correct byte
+			dc.w zoff			; write the address
+			dc.b zbyte, '>'			; write the byte and separator
 		endr
-
-		dc.b "	END"				; end the assembly
-		POPS					; go back to Main section
 	endif
+		POPS					; go back to Main section
 
 	ds.b Z80_Space					; reserve space for the Z80 driver
 	even

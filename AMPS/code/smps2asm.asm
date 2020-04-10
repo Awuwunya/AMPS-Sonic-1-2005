@@ -406,13 +406,8 @@ sModAMPS	macro wait, speed, step, count
 	sModData \wait,\speed,\step,\count
     endm
 
-sModData	macro wait, speed, step, count
-	dc.b \speed, \count, \wait, \step
-    endm
-
-; F1xx - Set portamento speed to xx frames. 0 means portamento is disabled (PORTAMENTO)
-ssPortamento	macro frames
-	dc.b $F1, \frames
+sModData	macro wait, speed, count, step
+	dc.b \speed, \count, \step, \wait
     endm
 
 ; FF00 - Turn on Modulation (MOD_SET - MODS_ON)
@@ -423,6 +418,22 @@ sModOn		macro
 ; FF04 - Turn off Modulation (MOD_SET - MODS_OFF)
 sModOff		macro
 	dc.b $FF,$04
+    endm
+
+; FF28xxxx - Set modulation frequency to xxxx (MOD_SET - MODS_FREQ)
+ssModFreq	macro freq
+	dc.b $FF,$28
+	dc.w \freq
+    endm
+
+; FF2C - Reset modulation data (MOD_SET - MODS_RESET)
+sModReset	macro
+	dc.b $FF,$2C
+    endm
+
+; F1xx - Set portamento speed to xx frames. 0 means portamento is disabled (PORTAMENTO)
+ssPortamento	macro frames
+	dc.b $F1, \frames
     endm
 
 ; F4xxxx - Keep looping back to xxxx each time the SFX is being played (CONT_SFX)
@@ -576,4 +587,4 @@ snOff =		$00			; disables PSG3 noise mode.
 _num =		$E0
 	enum snPeri10, snPeri20, snPeri40, snPeriPSG3
 	enum snWhite10,snWhite20,snWhite40,snWhitePSG3
-
+; ---------------------------------------------------------------------------

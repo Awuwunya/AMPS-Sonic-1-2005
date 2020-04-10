@@ -975,6 +975,7 @@ Credits_Loop11:
 	dc.b nC7, $01, sHold
 	ssDetune	$00
 	sModAMPS	$2C, $01, $04, $04
+	sModReset
 	dc.b nC7, $23
 	sModOff
 	sVoice		$0F
