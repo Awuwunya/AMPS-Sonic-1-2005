@@ -1,9 +1,10 @@
 Main		SECTION org(0)
-Z80_Space =	$808		; The amount of space reserved for Z80 driver. The compressor tool may ask you to increase the size...
+Z80_Space =	$808			; The amount of space reserved for Z80 driver. The compressor tool may ask you to increase the size...
 z80_ram:	equ $A00000
 z80_bus_request	equ $A11100
 z80_reset:	equ $A11200
 ConsoleRegion	equ $FFFFFFF8
+Drvmem		equ $FFFFF000
 
 		include "AMPS/lang.asm"
 		include "AMPS/code/macro.asm"

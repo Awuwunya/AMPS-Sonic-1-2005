@@ -44,20 +44,14 @@ sHeaderInitSFX	macro
 
 ; Header - Set up channel usage
 sHeaderCh	macro fm,psg
-	if narg=2
+	if narg>1
 		dc.b \psg-1, \fm-1
-		if \psg>3
-			inform 2,"You sure there are \psg PSG channels?"
+		if \fm>(5+((FEATURE_FM6<>0)&1))
+			inform 1,"You sure there are \fm FM channels?"
 		endif
 
-		if FEATURE_FM6
-			if \fm>6
-				inform 2,"You sure there are \fm FM channels?"
-			endif
-		else
-			if \fm>5
-				inform 2,"You sure there are \fm FM channels?"
-			endif
+		if \psg>3
+			inform 1,"You sure there are \psg PSG channels?"
 		endif
 	else
 		dc.b \fm-1
@@ -78,9 +72,9 @@ sHeaderPrio	macro prio
 sHeaderDAC	macro loc,vol,samp
 	dc.w \loc-*
 
-	if narg>=2
-		dc.b \vol
-		if narg>=3
+	if narg>1
+		dc.b (\vol)&$FF
+		if narg>2
 			dc.b \samp
 		else
 			dc.b $00
@@ -123,7 +117,7 @@ spAlgorithm	macro val, name
 	endif
 
 	if narg>1
-p\name =	sPatNum
+p\name =		sPatNum
 	endif
 
 sPatNum =	sPatNum+1
@@ -271,11 +265,11 @@ spTL4 =		\op4
 ; Equates for sPan
 ; ---------------------------------------------------------------------------
 
-spNone =	$00
-spRight =	$40
-spLeft =	$80
-spCentre =	$C0
-spCenter =	$C0
+spNone equ	$00
+spRight equ	$40
+spLeft equ	$80
+spCentre equ	$C0
+spCenter equ	$C0
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Tracker commands
@@ -325,7 +319,7 @@ ssTickMul	macro tick
     endm
 
 ; E7 - Do not attack of next note (HOLD)
-sHold =		$E7
+sHold equ		$E7
 
 ; E8xx - Set patch/voice/sample to xx (INSTRUMENT - INS_C_FM / INS_C_PSG / INS_C_DAC)
 sVoice		macro voice
@@ -403,7 +397,7 @@ ssLFO		macro reg, ams, fms, pan
 ; (MOD_SETUP)
 sModAMPS	macro wait, speed, step, count
 	dc.b $F0
-	sModData \wait,\speed,\step,\count
+	sModData \wait, \speed, \step, \count
     endm
 
 sModData	macro wait, speed, step, count
@@ -531,18 +525,6 @@ sPlayMus	macro id
 	dc.b $FF,$24, \id
     endm
 
-; FF28 - Enable raw frequency mode (RAW_FREQ)
-sFreqOn		macro
-	dc.b $FF,$28
-	inform 3,"Flag is currently not implemented! Please remove."
-    endm
-
-; FF2C - Disable raw frequency mode (RAW_FREQ - RAW_FREQ_OFF)
-sFreqOff	macro
-	dc.b $FF,$2C
-	inform 3,"Flag is currently not implemented! Please remove."
-    endm
-
 ; FF30 - Enable FM3 special mode (SPC_FM3)
 sSpecFM3	macro
 	dc.b $FF,$30
@@ -583,7 +565,6 @@ sCheck		macro
 ; ---------------------------------------------------------------------------
 
 snOff =		$00			; disables PSG3 noise mode.
-
 _num =		$E0
 	enum snPeri10, snPeri20, snPeri40, snPeriPSG3
 	enum snWhite10,snWhite20,snWhite40,snWhitePSG3

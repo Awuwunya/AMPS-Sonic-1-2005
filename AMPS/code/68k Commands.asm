@@ -11,7 +11,6 @@
 dCommands:
 		add.b	d1,d1			; quadruple command ID
 		add.b	d1,d1			; since each entry is 4 bytes large
-
 		btst	#cfbCond,(a1)		; check if condition state
 		bne.w	.falsecomm		; branch if false
 		jmp	.comm-$80(pc,d1.w)	; jump to appropriate handler
@@ -575,7 +574,8 @@ dcPortamento:
 dcMod68K:
 	if FEATURE_MODULATION
 		move.l	a2,cMod(a1)		; set modulation data address
-		addq.w	#3,a2			; skip all the modulation data
+		addq.w	#2,a2			; skip all the modulation data
+		move.b	(a2)+,cModStep(a1)	; copy step offset
 		move.b	(a2)+,cModDelay(a1)	; copy delay
 	; continue to enabling modulation
 	endif
@@ -619,9 +619,13 @@ dcModReset:
 		move.b	(a4)+,cModSpeed(a1)	; copy speed
 
 		move.b	(a4)+,d4		; get number of steps
+		beq.s	.set			; branch if 0 specifically (otherwise this would cause a problem)
 		lsr.b	#1,d4			; halve it
-		move.b	d4,cModCount(a1)	; save as the current number of steps
+		bne.s	.set			; if result is not 0, branch
+		moveq	#1,d4			; use 1 is the initial count, not 0!
 
+.set
+		move.b	d4,cModCount(a1)	; save as the current number of steps
 		move.b	(a4)+,cModStep(a1)	; copy step offset
 		move.b	(a4)+,cModDelay(a1)	; copy delay
 		rts
@@ -954,9 +958,19 @@ dUpdateVoiceFM:
 dcStop:
 		and.b	#$FF-(1<<cfbHold)-(1<<cfbRun),(a1); clear hold and running tracker flags
 	dStopChannel	0			; stop channel operation
-
 		cmpa.w	#mSFXFM3,a1		; check if this is a SFX channel
-		blo.s	.exit			; if not, skip all this
+		bhs.s	.sfx			; if yes, run SFX code
+
+		btst	#ctbDAC,cType(a1)	; check if the channel is a DAC channel
+		beq.s	.nodac			; if not, skip
+		clr.b	cPanning(a1)		; clear panning (required for DAC to work right)
+
+.nodac
+		addq.l	#2,(sp)			; go to next channel immediately (this skips a bra.s instruction)
+		rts
+; ---------------------------------------------------------------------------
+
+.sfx
 		clr.b	cPrio(a1)		; clear channel priority
 
 		lea	dSFXoverList(pc),a4	; load quick reference to the SFX override list to a4
@@ -1002,7 +1016,7 @@ dcStop:
 
 		cmp.b	#ctPSG4,cType(a4)	; check if this channel is in PSG4 mode
 		bne.s	.exit			; if not, skip
-		move.b	cStatPSG4(a4),dPSG.l	; update PSG4 status to PSG port
+		move.b	cStatPSG4(a4),dPSG	; update PSG4 status to PSG port
 		bra.s	.exit
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -1154,6 +1168,7 @@ dcCondCom:
 
 .false
 		bset	#cfbCond,(a1)		; set condition to false
+; ---------------------------------------------------------------------------
 
 .cond
 	rts			; T

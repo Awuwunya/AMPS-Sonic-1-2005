@@ -49,15 +49,15 @@ dAMPSnextDAC:
 
 .pcnote
 	dProcNote 0, -1				; reset necessary channel memory
-        	tst.b   d4            		; check if channel was resting
-        	bmi.s   .rest            	; if yes, we do not want to note on anymore
-        	bsr.s   dNoteOnDAC        	; do hardware note-on behavior
-        	bra.s   .ckvol
+		tst.b	d4			; check if channel was resting
+		bmi.s	.rest			; if yes, we do not want to note on anymore
+		bsr.s	dNoteOnDAC		; do hardware note-on behavior
+		bra.s	.ckvol
 ; ---------------------------------------------------------------------------
 
 .rest
-        	moveq   #0,d3            	; play stop sample
-        	bsr.s   dNoteOnDAC2        	; ''
+		moveq	#0,d3			; play stop sample
+		bsr.s	dNoteOnDAC2		; ''
 
 .ckvol
 	if FEATURE_DACFMVOLENV=0
