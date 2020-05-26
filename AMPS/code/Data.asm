@@ -4,7 +4,7 @@
 ; make it easier to debug built ROMS! If you would like easier
 ; assistance from Natsumi, please keep this section intact!
 ; ---------------------------------------------------------------------------
-	dc.b "AMPS-v1.1"		; ident str
+	dc.b "AMPS-v2.1"		; ident str
 
 	if safe
 		dc.b "s"		; safe mode enabled
@@ -44,6 +44,10 @@
 	if FEATURE_BACKUP
 		dc.b "BA"		; backup enabled
 	endif
+
+	if FEATURE_SOUNDTEST
+		dc.b "ST"		; soundtest enabled
+	endif
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Define music and SFX
@@ -57,9 +61,9 @@
 __mus =		MusOff
 
 MusicIndex:
-	ptrMusic GHZ, $25, LZ, $02, MZ, $02, SLZ, $07, SYZ, $0C, SBZ, $20, FZ, $10
-	ptrMusic Boss, $2E, SS, $00, Invincibility, $01, Drowning, $80
-	ptrMusic Title, $00, GotThroughAct, $00, Emerald, $00, ExtraLife, $33
+	ptrMusic GHZ, $30, LZ, $26, MZ, $1A, SLZ, $20, SYZ, $49, SBZ, $13, FZ, $18
+	ptrMusic Boss, $12, SS, $20, Invincibility, $20, Drowning, $00
+	ptrMusic Title, $00, GotThroughAct, $00, Emerald, $00, ExtraLife, $00
 	ptrMusic GameOver, $00, Continue, $00, Ending, $00, Credits, $00, SEGA, $00
 
 MusCount =	__mus-MusOff		; number of installed music tracks
