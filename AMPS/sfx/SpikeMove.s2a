@@ -7,7 +7,7 @@
 	sNoisePSG	snWhitePSG3
 	dc.b nE5, $07
 
-.Loop	dc.b nA5, $01
+.Loop	dc.b nBb5, $01
 	saVol		$08
 	sLoop		$00, $0C, .Loop
 	sStop

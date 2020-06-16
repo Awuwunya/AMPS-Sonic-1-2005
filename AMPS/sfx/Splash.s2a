@@ -6,7 +6,7 @@
 
 .PSG3	sVolEnv		vNone
 	sNoisePSG	snWhitePSG3
-	dc.b nF5, $05, nA5, $05, sHold
+	dc.b nF5, $05, nBb5, $05, sHold
 
 .Loop1	dc.b $07
 	saVol		$08
