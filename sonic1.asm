@@ -200,7 +200,7 @@ GameProgram:
 		beq.w	GameInit	; if yes, branch
 
 CheckSumCheck:
-		movea.l	#ErrorTrap,a0	; start	checking bytes after the header	($200)
+		movea.l	#EntryPoint,a0	; start	checking bytes after the header	($200)
 		movea.l	#RomEndLoc,a1	; stop at end of ROM
 		move.l	(a1),d0
 		moveq	#0,d1
@@ -211,7 +211,7 @@ loc_32C:
 		bcc.s	loc_32C
 		movea.l	#Checksum,a1	; read the checksum
 		cmp.w	(a1),d1		; compare correct checksum to the one in ROM
-	;	bne.w	CheckSumError	; if they don't match, branch
+		bne.w	CheckSumError	; if they don't match, branch
 		lea	($FFFFFE00).w,a6
 		moveq	#0,d7
 		move.w	#$7F,d6
