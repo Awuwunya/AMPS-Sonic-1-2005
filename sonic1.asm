@@ -5260,7 +5260,7 @@ Obj81_GetUp:				; XREF: Obj81_Animate
 		move.b	#$1E,$1C(a0)	; use "getting up" animation
 		clr.w	$14(a0)
 		subq.w	#8,$C(a0)
-		music	mus_FadeOut	; fade out music
+		command	mus_FadeOut	; fade out music
 
 Obj81_Run:				; XREF: Obj81_Index
 		cmpi.w	#$800,$14(a0)	; check	Sonic's "run speed" (not moving)
@@ -5292,7 +5292,7 @@ Map_obj80:
 ; ---------------------------------------------------------------------------
 
 EndingSequence:				; XREF: GameModeArray
-		music	mus_Stop	; stop music
+		command	mus_Stop	; stop music
 		bsr.w	Pal_FadeFrom
 		lea	($FFFFD000).w,a1
 		moveq	#0,d0
@@ -14567,9 +14567,9 @@ loc_C294:
 		add.w	d0,8(a1)
 		move.w	d1,$14(a1)
 		move.w	#0,$10(a1)
-		move.w	d0,-(sp)
+	;	move.w	d0,-(sp)
 		sfx	sfx_PushBlock	; play pushing sound
-		move.w	(sp)+,d0
+	;	move.w	(sp)+,d0
 		tst.b	$28(a0)
 		bmi.s	locret_C2E4
 		move.w	d0,-(sp)
@@ -14828,7 +14828,7 @@ Obj39_ChgMode:				; XREF: Obj39_Wait
 		tst.b	($FFFFFE18).w	; do you have any continues?
 		bne.s	Obj39_Display	; if yes, branch
 		move.b	#0,($FFFFF600).w ; set mode to 0 (Sega screen)
-		music	mus_Reset	 ; fade reset music
+		command	mus_Reset	 ; fade reset music
 		bra.s	Obj39_Display
 ; ===========================================================================
 
@@ -35747,7 +35747,6 @@ Obj09_GlassUpdate:
 
 Obj09_GlassSnd:
 		sfx	sfx_Diamonds	; play glass block sound
-		rts
 ; ===========================================================================
 
 Obj09_NoGlass:
