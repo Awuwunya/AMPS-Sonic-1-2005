@@ -2,7 +2,7 @@
 ; ---------------------------------------------------------------------------
 ; Flags section. None of this is required, but I added it here to
 ; make it easier to debug built ROMS! If you would like easier
-; assistance from Natsumi, please keep this section intact!
+; assistance from Aurora, please keep this section intact!
 ; ---------------------------------------------------------------------------
 	dc.b "AMPS-v2.1"		; ident str
 
