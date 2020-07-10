@@ -2,7 +2,7 @@
 ; ---------------------------------------------------------------------------
 ; Flags section. None of this is required, but I added it here to
 ; make it easier to debug built ROMS! If you would like easier
-; assistance from Aurora, please keep this section intact!
+; assistance from Natsumi, please keep this section intact!
 ; ---------------------------------------------------------------------------
 	dc.b "AMPS-v2.1"		; ident str
 
@@ -84,7 +84,7 @@ SoundIndex:
 	ptrSFX	0, EnterSS, Goal, ActionBlock, Diamonds, Continue
 
 ; SFX with special features
-	ptrSFX	$80, PushBlock
+	ptrSFX	$80, PushBlock, Waterfall
 
 ; unused SFX
 	ptrSFX	0, UnkA2, UnkAB, UnkB8

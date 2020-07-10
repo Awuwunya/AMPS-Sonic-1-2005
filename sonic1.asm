@@ -4074,10 +4074,9 @@ LZWind_Loop:
 		bcs.s	loc_3EF4
 		cmp.w	6(a2),d2
 		bcc.s	loc_3EF4
-		move.b	($FFFFFE0F).w,d0
-		andi.b	#$3F,d0
-	;	bne.s	loc_3E90
-	;	sfx	$D0		; play rushing water sound
+		tst.b	mQueue+2.w		; check if any sound was queued
+		bne.s	loc_3E90		; if was, skip
+		move.b	#sfx_Waterfall,mQueue+2.w; else, play this again
 
 loc_3E90:
 		tst.b	($FFFFF7C9).w
@@ -4189,10 +4188,9 @@ loc_3F9A:
 		clr.b	$15(a1)
 		move.b	#$1B,$1C(a1)	; use Sonic's "sliding" animation
 		move.b	#1,($FFFFF7CA).w ; lock	controls (except jumping)
-	;	move.b	($FFFFFE0F).w,d0
-	;	andi.b	#$1F,d0
-	;	bne.s	locret_3FBE
-	;	sfx	$D0		; play water sound
+		tst.b	mQueue+2.w		; check if any sound was queued
+		bne.s	locret_3FBE		; if was, skip
+		move.b	#sfx_Waterfall,mQueue+2.w; else, play this again
 
 locret_3FBE:
 		rts
@@ -15786,10 +15784,10 @@ Obj49_Main:				; XREF: Obj49_Index
 		move.b	#4,1(a0)
 
 Obj49_PlaySnd:				; XREF: Obj49_Index
-;		move.b	($FFFFFE0F).w,d0
-;		andi.b	#$3F,d0
-;		bne.s	Obj49_ChkDel
-;		sfx	$D0		; play waterfall sound
+	; this is to avoid overwriting any other sfx
+		tst.b	mQueue+2.w		; check if any sound was queued
+		bne.s	Obj49_ChkDel		; if was, skip
+		move.b	#sfx_Waterfall,mQueue+2.w; else, play this again
 
 Obj49_ChkDel:
 		move.w	8(a0),d0
@@ -23351,6 +23349,10 @@ Obj01_InWater:
 		asr	$12(a0)
 		beq.s	locret_12D80
 		move.b	#8,($FFFFD300).w ; load	splash object
+		
+		tst.w	($FFFFFE02).w		; NTP: This check is here to fix a very dumb bug that causes the splash sound to play...
+		bne.s	locret_12D80		; NTP: ...during the SBZ2 -> SBZ3 transition. Doesn't happen in the original somehow :/
+		
 		sfx	sfx_Splash	; play splash sound
 		rts
 ; ===========================================================================
