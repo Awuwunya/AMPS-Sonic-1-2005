@@ -23349,10 +23349,7 @@ Obj01_InWater:
 		asr	$12(a0)
 		beq.s	locret_12D80
 		move.b	#8,($FFFFD300).w ; load	splash object
-		
-		tst.w	($FFFFFE02).w		; NTP: This check is here to fix a very dumb bug that causes the splash sound to play...
-		bne.s	locret_12D80		; NTP: ...during the SBZ2 -> SBZ3 transition. Doesn't happen in the original somehow :/
-		
+
 		sfx	sfx_Splash	; play splash sound
 		rts
 ; ===========================================================================
@@ -32587,7 +32584,7 @@ loc_19954:
 
 Obj82_Leap:				; XREF: Obj82_EggIndex
 		subq.w	#1,$3C(a0)
-		bgt.s	loc_199D0
+		bgt.w	loc_199D0
 		bne.s	loc_1996A
 		move.w	#-$FC,$10(a0)	; make Eggman leap
 		move.w	#-$3C0,$12(a0)
@@ -32626,6 +32623,11 @@ Obj82_FindLoop:
 		move.w	#$474F,$28(a1)	; set block to disintegrate
 		addq.b	#2,$25(a0)
 		move.b	#1,$1C(a0)
+
+	; force water level to the bottom for the transition
+		move.w	#$7FF,$FFFFF646.w
+		move.w	#$7FF,$FFFFF648.w
+		move.w	#$7FF,$FFFFF64A.w
 
 loc_199D0:
 		bra.w	loc_19934
